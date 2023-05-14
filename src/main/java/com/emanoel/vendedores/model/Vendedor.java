@@ -1,7 +1,6 @@
 package com.emanoel.vendedores.model;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import org.springframework.data.annotation.Id;
@@ -15,7 +14,7 @@ public class Vendedor {
     @Id
     @GeneratedValue
     private Long id;
-    private Date dataInclusao;
+    private LocalDate dataInclusao;
 
     private String nome;
     private String telefone;
