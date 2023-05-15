@@ -6,7 +6,7 @@ import lombok.Builder;
 
 @Data
 @Builder
-public class AtuacaoRequest {
+public class RegiaoAtuacaoRequest {
     private String regiao;
     private List<String> estados;
 }

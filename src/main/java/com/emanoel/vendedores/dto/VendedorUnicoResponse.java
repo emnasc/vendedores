@@ -1,7 +1,7 @@
 package com.emanoel.vendedores.dto;
 
 import java.util.List;
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,6 +9,6 @@ import lombok.Data;
 @Builder
 public class VendedorUnicoResponse {
     private String nome;
-    private Date dataInclusao;
+    private LocalDate dataInclusao;
     private List<String> estados;
 }

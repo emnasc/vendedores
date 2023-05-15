@@ -13,5 +13,5 @@ public class VendedorResponse {
     private Integer idade;
     private String cidade;
     private String estado;
-    private List<String> estadosAtuacao;
+    private List<String> estados;
 }
