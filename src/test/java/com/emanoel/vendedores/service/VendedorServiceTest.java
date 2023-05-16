@@ -2,20 +2,12 @@ package com.emanoel.vendedores.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
-import java.time.Clock;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.MockedStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -76,11 +68,6 @@ public class VendedorServiceTest {
 
     @Test
     public void whenFetchingVendedorById_shouldReturnVendedorCorrectly() {
-
-        LocalDate fixedDate = LocalDate.now();
-        //when(LocalDate.now()).thenReturn(fixedDate);
-
-        //---------------------------------------------------------------------------------------
 
         String nomeRegiao = "sudeste";
 

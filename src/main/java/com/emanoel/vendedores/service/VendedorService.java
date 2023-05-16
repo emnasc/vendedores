@@ -2,6 +2,7 @@ package com.emanoel.vendedores.service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,17 +39,24 @@ public class VendedorService {
     }
 
     public VendedorUnicoResponse getVendedor(Long id) {
-        Vendedor vendedor = vendedorRepository.findById(id).get();
-        RegiaoAtuacao regiao = regiaoAtuacaoService.getRegiao(vendedor.getRegiao());
+        Optional<Vendedor> optional = vendedorRepository.findById(id);
 
-        return VendedorUnicoResponse.builder()
-        .nome(vendedor.getNome())
-        .dataInclusao(vendedor.getDataInclusao())
-        .estados(Arrays.asList(regiao.getEstados()))
-        .build();
+        if(optional.isPresent()) {
+            Vendedor vendedor = optional.get();
+
+            RegiaoAtuacao regiao = regiaoAtuacaoService.getRegiao(vendedor.getRegiao());
+
+            return VendedorUnicoResponse.builder()
+                .nome(vendedor.getNome())
+                .dataInclusao(vendedor.getDataInclusao())
+                .estados(Arrays.asList(regiao.getEstados()))
+                .build();
+        }
+
+        return null;
     }
 
-    private VendedorResponse convertFromVendedor(Vendedor vendedor) {
+    private VendedorResponse convertVendedorToResponse(Vendedor vendedor) {
         RegiaoAtuacao regiao = regiaoAtuacaoService.getRegiao(vendedor.getRegiao());
 
         return VendedorResponse.builder()
@@ -63,8 +71,8 @@ public class VendedorService {
 
     public List<VendedorResponse> getAllVendedores() {
         return vendedorRepository.findAll()
-        .stream()
-        .map(this::convertFromVendedor)
-        .collect(Collectors.toList());
+            .stream()
+            .map(this::convertVendedorToResponse)
+            .collect(Collectors.toList());
     }
 }
