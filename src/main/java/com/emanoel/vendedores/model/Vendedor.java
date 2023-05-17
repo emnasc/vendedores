@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -18,7 +21,7 @@ public class Vendedor {
     @Id
     @GeneratedValue
     private Long id;
-    private LocalDate dataInclusao;
+    @JsonFormat(pattern = "dd/MM/yyyy") private LocalDate dataInclusao;
 
     private String nome;
     private String telefone;

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.emanoel.vendedores.dto.RegiaoAtuacaoRequest;
 import com.emanoel.vendedores.dto.VendedorRequest;
+import com.emanoel.vendedores.dto.VendedorResponse;
 import com.emanoel.vendedores.dto.VendedorUnicoResponse;
 import com.emanoel.vendedores.model.RegiaoAtuacao;
 import com.emanoel.vendedores.model.Vendedor;
@@ -34,14 +35,14 @@ public class VendedorController {
     public ResponseEntity<Vendedor> addVendedor(@RequestBody VendedorRequest request) {
         Vendedor vendedorInserido = vendedorService.addVendedor(request);
 
-        return new ResponseEntity<Vendedor>(vendedorInserido, null, HttpStatus.CREATED);
+        return new ResponseEntity<Vendedor>(vendedorInserido, HttpStatus.CREATED);
     }
 
     @PostMapping("/atuacao")
     public ResponseEntity<RegiaoAtuacao> addRegiaoAtuacao(@RequestBody RegiaoAtuacaoRequest request) {
         RegiaoAtuacao regiaoInserida = regiaoAtuacaoService.addRegiao(request);
 
-        return new ResponseEntity<RegiaoAtuacao>(regiaoInserida, null, HttpStatus.CREATED);
+        return new ResponseEntity<RegiaoAtuacao>(regiaoInserida, HttpStatus.CREATED);
     }
 
     @GetMapping("vendedor/{id}")
@@ -49,21 +50,21 @@ public class VendedorController {
         VendedorUnicoResponse vendedorEncontrado = vendedorService.getVendedor(id);
 
         if(Objects.isNull(vendedorEncontrado)) {
-            return new ResponseEntity<>(null, null, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<VendedorUnicoResponse>(vendedorEncontrado, null, HttpStatus.OK);
+        return new ResponseEntity<VendedorUnicoResponse>(vendedorEncontrado, HttpStatus.OK);
     }
 
     @GetMapping("/vendedor")
-    public ResponseEntity<List<Vendedor>> getAllVendedores() {
-        ArrayList<Vendedor> vendedoresEncontrados = new ArrayList(vendedorService.getAllVendedores());
+    public ResponseEntity<List<VendedorResponse>> getAllVendedores() {
+        ArrayList<VendedorResponse> vendedoresEncontrados = new ArrayList<>(vendedorService.getAllVendedores());
 
         if(vendedoresEncontrados.isEmpty()) {
-            return new ResponseEntity<>(null, null, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<List<Vendedor>>(vendedoresEncontrados, null, HttpStatus.OK);
+        return new ResponseEntity<List<VendedorResponse>>(vendedoresEncontrados, HttpStatus.OK);
     }
 
 }
